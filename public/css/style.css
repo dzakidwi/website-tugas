@@ -1,0 +1,1132 @@
+/* ============================================
+   SOTO VOKASI - MAIN STYLESHEET
+   Version: 1.0
+   Author: Soto Vokasi Team
+   ============================================ */
+
+/* ============================================
+   1. RESET & BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+/* ============================================
+   2. UTILITY CLASSES
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   3. NAVBAR
+   ============================================ */
+/* ---------------- */
+/* STYLE NAVBAR */
+/* ---------------- */
+
+.navbar {
+    background: #fff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-out;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #F97316;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    /* Kuncinya: position relative untuk 'indicator' */
+    position: relative;
+}
+
+.nav-item {
+    margin: 0; /* Hapus margin, kita gunakan padding di link */
+}
+
+.nav-link {
+    color: #555;
+    text-decoration: none;
+    padding: 1.5rem 1rem; /* Padding ini menentukan ukuran 'kotak' */
+    display: block;
+    /* Kuncinya: agar teks di atas 'indicator' */
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+/* Hilangkan animasi garis bawah */
+.nav-link:hover {
+    color: #ffab03;
+}
+
+/* Style untuk link yang sedang 'active' */
+.nav-link.active {
+    color: #ffab03; /* Warna teks saat aktif */
+}
+
+/* Tombol CTA */
+.nav-btn {
+    background: #ffab03;
+    color: #fff;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    margin-left: 1rem; /* Beri jarak dari link terakhir */
+}
+
+.nav-btn:hover {
+    background: #ffab03;
+    color: #fff;
+}
+
+/* ---------------- */
+/* KOTAK INDIKATOR */
+/* ---------------- */
+
+.indicator {
+    position: absolute;
+    height: 45px; /* Tinggi kotak */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f0f0f0; /* Warna kotak */
+    border-radius: 8px;
+    z-index: 0; /* Di belakang teks link */
+    
+    /* Animasi geser yang smooth */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+/* Ikon Burger (Menu HP) */
+.nav-burger {
+    display: none;
+    cursor: pointer;
+}
+
+.nav-burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Efek Scroll */
+.navbar.scrolled {
+    height: 65px;
+}
+.navbar.scrolled .navbar-container {
+    height: 65px;
+}
+
+/* ---------------- */
+/* MODE RESPONSIVE (HP) */
+/* ---------------- */
+
+@media screen and (max-width: 960px) {
+    /* Sembunyikan 'indicator' di mode mobile */
+    .indicator {
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 70%;
+        height: 100vh;
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        opacity: 0;
+        background: #fff;
+        padding-top: 4rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .nav-menu.active {
+        right: 0;
+        opacity: 1;
+    }
+
+    .nav-item {
+        margin: 1rem 0; /* Kembalikan margin di mobile */
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 1.3rem;
+        padding: 1rem; /* Sesuaikan padding mobile */
+    }
+
+    /* Di mobile, tandai 'active' dengan warna saja */
+    .nav-link.active {
+        color: #007BFF;
+        font-weight: bold;
+    }
+    
+    .nav-btn {
+        width: 80%;
+        display: block;
+        margin: 1rem auto;
+    }
+
+    .nav-burger {
+        display: block;
+    }
+
+    .navbar.scrolled {
+        height: 65px;
+    }
+    .navbar.scrolled .nav-menu {
+        top: 65px;
+    }
+}
+
+/* Animasi Burger "X" */
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.burger.toggle .line2 {
+    opacity: 0;
+}
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ---------------- */
+/* EFEK SCROLL (via JavaScript) */
+/* ---------------- */
+
+.navbar.scrolled {
+    height: 65px; /* Navbar mengecil */
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled .navbar-container {
+    height: 65px;
+}
+
+/* ---------------- */
+/* MODE RESPONSIVE (HP) */
+/* ---------------- */
+
+@media screen and (max-width: 960px) {
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 70%; /* Lebar menu sliding */
+        height: 100vh;
+        position: fixed;
+        top: 80px; /* Di bawah navbar */
+        right: -100%; /* Sembunyi di luar layar */
+        opacity: 0;
+        background: #fff;
+        padding-top: 4rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        /* Transisi untuk slide-in */
+        transition: all 0.4s ease-in-out;
+    }
+
+    .nav-menu.active {
+        right: 0; /* Munculkan ke layar */
+        opacity: 1;
+    }
+
+    .nav-item {
+        margin: 1.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 1.3rem;
+    }
+
+    .nav-btn {
+        width: 80%;
+        display: block;
+        margin: 1rem auto;
+    }
+
+    .nav-burger {
+        display: block; /* Tampilkan ikon burger */
+    }
+
+    /* Navbar 'scrolled' di HP */
+    .navbar.scrolled {
+        height: 65px;
+    }
+    .navbar.scrolled .nav-menu {
+        top: 65px;
+    }
+}
+
+/* ---------------- */
+/* ANIMASI BURGER "X" (via JavaScript) */
+/* ---------------- */
+
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+    opacity: 0;
+}
+
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ============================================
+   4. HERO SECTION
+   ============================================ */
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('../images/index/index.png') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    color: white;
+    margin-top: 70px;
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #F97316;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:hover {
+    background: #EA580C;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+}
+/* ============================================
+   5. MENU SECTION
+   ============================================ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.menu-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+.menu-card-content {
+  padding: 20px;
+}
+
+.menu-card-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #d97706;
+  margin-bottom: 8px;
+}
+
+.menu-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.menu-card-description {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ============================================
+   6. ABOUT SECTION
+   ============================================ */
+/* --- Bagian 1: Hero "Cerita Hangat" --- */
+.section-hero-about {
+    padding-top: 60px; /* Padding tambahan di atas */
+    padding-bottom: 60px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-hero-image {
+    position: relative; /* Diperlukan untuk .contact-card */
+}
+.about-hero-image img {
+    width: 100%;
+    height: 550px; /* Tentukan tinggi agar konsisten */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.contact-card {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    background: rgba(20, 20, 20, 0.85); /* Latar transparan gelap */
+    color: white;
+    padding: 24px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+}
+.contact-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.contact-card p {
+    font-size: 14px;
+    color: #e5e7eb;
+    margin-bottom: 4px;
+    line-height: 1.5;
+    word-wrap: break-word; /* Agar email tidak overflow */
+}
+
+.about-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+.about-content p {
+  font-size: 16px;
+  color: #4b5563;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+/* --- Bagian 2: Banner "Ide Sederhana" --- */
+.banner-section {
+    /* GANTI URL ini ke gambar banner Anda */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('/images/about/vokasi.png') no-repeat center center/cover;
+    background-attachment: fixed; /* Efek parallax */
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+.banner-section h2 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- Bagian 3: Fitur "Resep, Pesan, Kirim" --- */
+.features-section-about {
+    background: #fdfdfd;
+}
+.features-grid-about {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.feature-icon {
+    width: 56px; /* Disesuaikan agar pas */
+    height: 56px;
+    margin: 0 auto 16px;
+}
+.feature-item-about h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.feature-item-about p {
+    color: #6b7280;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* --- Bagian 4: Sang Peracik & Stats --- */
+.founder-section {
+    background: #f9fafb; /* Latar abu-abu muda */
+}
+
+.founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.founder-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+}
+.founder-content .founder-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #F97316; /* Oranye */
+    margin-bottom: 16px;
+}
+.founder-content p {
+    margin-bottom: 32px; /* Jarak ke stats */
+    color: #4b5563;
+    font-size: 16px;
+}
+.founder-image img {
+    width: 100%;
+    height: 550px; /* Sesuaikan tinggi */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Stats Grid - Modifikasi dari CSS internal Anda */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2x2 Grid */
+    gap: 20px; 
+}
+.stat-item {
+    text-align: left; /* Teks rata kiri sesuai desain */
+    padding: 20px;
+    background: #ffffff; /* Kotak putih */
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+.stat-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1f2937; /* Warna angka gelap */
+    margin-bottom: 4px;
+}
+.stat-label {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+/* ============================================
+    7. SERVICES SECTION (Layanan Unik)
+   ============================================ */
+/* Ini adalah section "Layanan Unik" (Catering, Ultah, dll.)
+  dari HTML Anda yang lama. 
+  Style ini dibiarkan di sini untuk halaman lain 
+  jika Anda membutuhkannya.
+*/
+.services-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+}
+.service-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+.service-item h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.service-item p {
+    font-size: 16px;
+    color: #4b5563;
+    margin: 0;
+}
+
+/* ============================================
+   7. FEATURES SECTION
+   ============================================ */
+/* --- Pengaturan Dasar & Font --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Mengatur agar padding dan border tidak menambah ukuran elemen */
+* {
+    box-sizing: border-box;
+}
+
+/* --- Kelas Layout Utama --- */
+
+/* Ini adalah 'container-custom' Anda. 
+  Membatasi lebar konten dan menempatkannya di tengah.
+*/
+.container {
+    width: 100%;
+    max-width: 1100px; /* Lebar maksimum konten */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;  /* Padding di sisi kiri dan kanan */
+    padding-right: 20px;
+}
+
+/* Ini adalah 'py-16' Anda. 
+  Memberi padding atas dan bawah pada seluruh bagian.
+*/
+.services-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+/* --- Judul --- */
+
+/* Ini adalah 'section-title' Anda.
+  Style untuk judul utama.
+*/
+.section-title {
+    font-size: 36px;   /* Ukuran font besar */
+    font-weight: 700;  /* Tebal (bold) */
+    color: #1f2937;   /* Warna teks gelap (mirip 'text-gray-900') */
+    margin-top: 0;
+    margin-bottom: 48px; /* Spasi bawah (mirip 'mb-12') */
+}
+
+/* --- Grid Layanan --- */
+
+/* Ini adalah 'grid grid-cols-4 gap-8' Anda.
+  Menggunakan CSS Grid untuk membuat 4 kolom.
+*/
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 kolom dengan lebar sama */
+    gap: 32px; /* Jarak antar item (mirip 'gap-8') */
+}
+
+/* --- Item/Kartu Layanan --- */
+
+.service-item img {
+    width: 100%; /* Gambar mengisi lebar wadah */
+    height: 200px; /* Tinggi gambar tetap */
+    object-fit: cover; /* Agar gambar tidak penyok/stretch */
+    border-radius: 8px; /* Sudut melengkung (mirip 'rounded-lg') */
+    margin-bottom: 16px; /* Jarak bawah (mirip 'mb-4') */
+}
+
+.service-item h3 {
+    font-size: 20px;   /* Ukuran font (mirip 'text-xl') */
+    font-weight: 600;  /* Ketebalan (mirip 'font-semibold') */
+    color: #1f2937;
+    margin-top: 0;
+    margin-bottom: 8px; /* Jarak bawah (mirip 'mb-2') */
+}
+
+.service-item p {
+    font-size: 16px;
+    color: #4b5563; /* Warna teks abu-abu (mirip 'text-gray-600') */
+    margin: 0; /* Menghapus margin bawaan paragraf */
+}
+
+
+/* --- Pengaturan Responsif (Agar Rapi di HP) --- */
+
+/* Untuk layar tablet (di bawah 1024px) */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: 1fr 1fr; /* Menjadi 2 kolom */
+    }
+}
+
+/* Untuk layar HP (di bawah 767px) */
+@media (max-width: 767px) {
+    .services-grid {
+        grid-template-columns: 1fr; /* Menjadi 1 kolom */
+    }
+
+    .section-title {
+        font-size: 30px; /* Judul sedikit lebih kecil di HP */
+    }
+}
+
+/* ============================================
+   8. TESTIMONIAL SECTION
+   ============================================ */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.testimonial-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.testimonial-quote {
+  font-size: 18px;
+  font-weight: 600;
+  color: #d97706;
+  margin-bottom: 16px;
+}
+
+.testimonial-text {
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+.testimonial-info h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.testimonial-info p {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ============================================
+   9. FAQ SECTION
+   ============================================ */
+.faq-list {
+  max-width: 800px;
+  margin: 48px auto 0;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: transparent;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.faq-question:hover {
+  background: #f9fafb;
+}
+
+.faq-icon {
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+.faq-answer-content {
+  padding: 0 24px 20px;
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+/* ============================================
+   10. CONTACT FORM
+   ============================================ */
+.contact-form {
+  max-width: 600px;
+  margin: 48px auto 0;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #d97706;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-button {
+  width: 100%;
+  padding: 14px;
+  background: #d97706;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.form-button:hover {
+  background: #b45309;
+}
+
+/* ============================================
+   11. FOOTER
+   ============================================ */
+.footer {
+  background: #1f2937;
+  color: #d1d5db;
+  padding: 60px 0 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+  font-size: 24px;
+  color: #d97706;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #9ca3af;
+}
+
+.footer-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.footer-links a:hover {
+  color: #d97706;
+}
+
+.footer-bottom {
+  padding-top: 30px;
+  border-top: 1px solid #374151;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #374151;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.footer-social a:hover {
+  background: #d97706;
+}
+
+/* ============================================
+   12. RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 992px) {
+  .about-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .navbar-menu {
+    position: fixed;
+    top: 72px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 72px);
+    background: #ffffff;
+    flex-direction: column;
+    padding: 40px 20px;
+    transition: left 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-menu.active {
+    left: 0;
+  }
+  
+  .navbar-toggle {
+    display: flex;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 60px 0;
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .menu-grid,
+  .features-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}

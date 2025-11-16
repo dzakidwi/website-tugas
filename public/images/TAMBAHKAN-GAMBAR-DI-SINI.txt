@@ -1,0 +1,33 @@
+# PANDUAN GAMBAR
+
+## Gambar yang Harus Ditambahkan (12 foto):
+
+### 📁 images/menu/ (8 foto makanan/minuman)
+1. `soto-ayam-spesial.jpg` - Foto Soto Ayam Spesial
+2. `soto-daging-sapi.jpg` - Foto Soto Daging Sapi
+3. `es-teh-manis.jpg` - Foto Es Teh Manis
+4. `paket-vokasi-juara.jpg` - Foto Paket Lengkap
+5. `soto-ayam-biasa.jpg` - Foto Soto Ayam Biasa
+6. `es-dawet.jpg` - Foto Es Dawet
+7. `air-es.jpg` - Foto Air Es
+8. `es-jeruk.jpg` - Foto Es Jeruk
+
+### 📁 images/about/ (1 foto)
+1. `warung.jpg` - Foto warung/tempat usaha
+
+### 📁 images/customers/ (3 foto)
+1. `customer1.jpg` - Foto customer 1
+2. `customer2.jpg` - Foto customer 2
+3. `customer3.jpg` - Foto customer 3
+
+## Spesifikasi:
+- Format: JPG atau PNG
+- Ukuran: Max 500KB per file
+- Resolusi: 600x600px (menu), 800x600px (lainnya)
+- Compress dengan: https://tinypng.com
+
+## Tips Foto Menu:
+1. Gunakan pencahayaan yang baik
+2. Foto dari angle 45 derajat
+3. Background bersih
+4. Tampilkan garnish dengan jelas

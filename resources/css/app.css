@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+  @apply px-6 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition duration-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-2 bg-secondary text-white rounded-lg hover:bg-primary transition duration-300;
+}
+
+.btn-outline {
+  @apply px-6 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition duration-300;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300;
+}
+
+.input-field {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20;
+}
