@@ -1,41 +1,67 @@
 @extends('layouts.admin')
 
 @section('title', 'Edit Admin')
-@section('header', 'Edit Admin')
 
 @section('content')
-<div class="card p-8 max-w-2xl">
-    <form action="{{ route('admin.admins.update', $admin) }}" method="POST" class="space-y-6">
-        @csrf
-        @method('PUT')
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Admin</h1>
+        <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </div>
 
-        <div>
-            <label class="block text-gray-700 font-semibold mb-2">Nama</label>
-            <input type="text" name="name" class="input-field" value="{{ $admin->name }}" required>
-        </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form action="{{ route('admin.admins.update', $admin) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group">
+                    <label for="name">Nama Admin <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                           id="name" name="name" value="{{ old('name', $admin->name) }}" required>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <div>
-            <label class="block text-gray-700 font-semibold mb-2">Email</label>
-            <input type="email" name="email" class="input-field" value="{{ $admin->email }}" required>
-        </div>
+                <!-- TAMBAH FIELD EMAIL -->
+                <div class="form-group">
+                    <label for="email">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                           id="email" name="email" value="{{ old('email', $admin->email) }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-        <div>
-            <label class="block text-gray-700 font-semibold mb-2">No. Telepon</label>
-            <input type="text" name="phone" class="input-field" value="{{ $admin->phone }}">
-        </div>
+                <div class="form-group">
+                    <label for="password">Password Baru</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                           id="password" name="password">
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah password</small>
+                </div>
 
-        <div>
-            <label class="block text-gray-700 font-semibold mb-2">Role</label>
-            <select name="role" class="input-field" required>
-                <option value="admin" {{ $admin->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="superadmin" {{ $admin->role === 'superadmin' ? 'selected' : '' }}>SuperAdmin</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Konfirmasi Password Baru</label>
+                    <input type="password" class="form-control" 
+                           id="password_confirmation" name="password_confirmation">
+                </div>
 
-        <div class="flex gap-4">
-            <button type="submit" class="btn-primary">Update Admin</button>
-            <a href="{{ route('admin.admins.index') }}" class="btn-outline">Batal</a>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update
+                    </button>
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Batal
+                    </a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

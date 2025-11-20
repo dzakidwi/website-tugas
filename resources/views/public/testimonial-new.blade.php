@@ -11,6 +11,28 @@
         background: #ffffff;
         text-align: center;
     }
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        width: 100%;
+        grid-column: 1 / -1;
+    }
+    .empty-state h3 {
+        color: #374151;
+        font-size: 28px;
+        margin-bottom: 16px;
+        font-weight: 600;
+    }
+    .empty-state p {
+        color: #6b7280;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    .empty-state-icon {
+        font-size: 64px;
+        margin-bottom: 24px;
+        opacity: 0.5;
+    }
 </style>
 @endpush
 
@@ -48,89 +70,11 @@
                     </div>
                 </div>
                 @empty
-                <!-- Default testimonials -->
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Restoran terbaik"</div>
-                    <p class="testimonial-text">
-                        Pelayanannya ramah dan cepat. Saya coba paket lengkap dan porsinya sangat mengenyangkan.
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer1.png') }}" alt="M. Dzaki Dwi Putra" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>M. Dzaki Dwi Putra</h4>
-                            <p>Mojokerto, Jawa Timur</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Sangat lezat"</div>
-                    <p class="testimonial-text">
-                        Sotonya benar-benar otentik! Kuahnya kaya rasa dan dagingnya empuk. Tempatnya juga bersih dan nyaman.
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer2.png') }}" alt="M. Habib Masyhur" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>M. Habib Masyhur</h4>
-                            <p>Demak, Jawa Tengah</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Restoran yang unik"</div>
-                    <p class="testimonial-text">
-                        Tempat yang pas untuk makan siang bersama teman-teman kantor. Suasananya adem.
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer3.png') }}" alt="Mahiendra Fikri" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Mahiendra Fikri</h4>
-                            <p>Blitar, Jawa Timur</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Recommended!"</div>
-                    <p class="testimonial-text">
-                        Harga terjangkau dengan kualitas rasa yang mantap. Pasti akan kembali lagi kesini!
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer1.png') }}" alt="Ahmad Fauzi" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Ahmad Fauzi</h4>
-                            <p>Surabaya, Jawa Timur</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Enak banget!"</div>
-                    <p class="testimonial-text">
-                        Sotonya enak, bumbunya pas, dan pelayanannya cepat. Cocok buat makan keluarga.
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer2.png') }}" alt="Siti Nurhaliza" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Siti Nurhaliza</h4>
-                            <p>Malang, Jawa Timur</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"Worth it!"</div>
-                    <p class="testimonial-text">
-                        Porsi besar, harga murah, rasa juara. Sangat worth it untuk dicoba!
-                    </p>
-                    <div class="testimonial-author">
-                        <img src="{{ asset('images/customers/customer3.png') }}" alt="Budi Santoso" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Budi Santoso</h4>
-                            <p>Kediri, Jawa Timur</p>
-                        </div>
-                    </div>
+                <!-- Empty State -->
+                <div class="empty-state">
+                    <div class="empty-state-icon">💬</div>
+                    <h3>Belum Ada Testimoni</h3>
+                    <p>Jadilah yang pertama membagikan pengalaman Anda dengan Soto Vokasi!</p>
                 </div>
                 @endforelse
             </div>
@@ -151,7 +95,7 @@
                         <label for="name" class="form-label">Nama</label>
                         <input type="text" id="name" name="name" class="form-input" placeholder="Masukkan nama Anda" value="{{ old('name') }}" required>
                         @error('name')
-                            <span class="error-text">{{ $message }}</span>
+                            <span class="error-text" style="color: #dc2626; font-size: 14px;">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -159,7 +103,7 @@
                         <label for="location" class="form-label">Lokasi (Opsional)</label>
                         <input type="text" id="location" name="location" class="form-input" placeholder="Kota, Provinsi" value="{{ old('location') }}">
                         @error('location')
-                            <span class="error-text">{{ $message }}</span>
+                            <span class="error-text" style="color: #dc2626; font-size: 14px;">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -174,7 +118,7 @@
                             <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>⭐ (1)</option>
                         </select>
                         @error('rating')
-                            <span class="error-text">{{ $message }}</span>
+                            <span class="error-text" style="color: #dc2626; font-size: 14px;">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -182,7 +126,7 @@
                         <label for="message" class="form-label">Testimoni</label>
                         <textarea id="message" name="message" class="form-textarea" placeholder="Ceritakan pengalaman Anda" required>{{ old('message') }}</textarea>
                         @error('message')
-                            <span class="error-text">{{ $message }}</span>
+                            <span class="error-text" style="color: #dc2626; font-size: 14px;">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -190,7 +134,7 @@
                         <label for="image" class="form-label">Foto (Opsional)</label>
                         <input type="file" id="image" name="image" class="form-input" accept="image/*">
                         @error('image')
-                            <span class="error-text">{{ $message }}</span>
+                            <span class="error-text" style="color: #dc2626; font-size: 14px;">{{ $message }}</span>
                         @enderror
                     </div>
 

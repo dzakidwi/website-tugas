@@ -2,31 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        // Superadmin
         Admin::create([
-            'name' => 'Super Admin',
-            'email' => 'superadmin@warung-soto.com',
-            'password' => Hash::make('password123'), // Ganti dengan password yang aman
-            'phone' => '081234567890',
-            'role' => 'superadmin'
-        ]);
-
-        // Admin biasa
-        Admin::create([
-            'name' => 'Admin Warung',
-            'email' => 'admin@warung-soto.com',
-            'password' => Hash::make('password123'),
-            'phone' => '081234567891',
-            'role' => 'admin'
+            'name' => 'Admin Soto Vokasi',
+            'email' => 'admin@sotovokasi.com',  // ← TAMBAH EMAIL
+            'password' => Hash::make('password'),
         ]);
     }
 }

@@ -9,106 +9,67 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    private function checkLogin()
-    {
-        if (!session()->has('admin_id')) {
-            return redirect()->route('admin.login');
-        }
-    }
-
-    private function checkSuperAdmin()
-    {
-        $adminId = session()->get('admin_id');
-        $admin = Admin::find($adminId);
-        if (!$admin || $admin->role !== 'superadmin') {
-            abort(403, 'Hanya superadmin yang bisa mengakses halaman ini');
-        }
-    }
-
-    // Tampilkan daftar admin
     public function index()
     {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
-        $admins = Admin::all();
+        $admins = Admin::latest()->paginate(10);
         return view('admin.admins.index', compact('admins'));
     }
 
-    // Tampilkan form create admin
     public function create()
     {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
         return view('admin.admins.create');
     }
 
-    // Simpan admin baru
     public function store(Request $request)
     {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
-
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:admins',
-            'password' => 'required|min:6|confirmed',
-            'phone' => 'nullable|string',
-            'role' => 'required|in:admin,superadmin'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email',  // ← TAMBAH INI
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
         Admin::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->email,  // ← TAMBAH INI
             'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-            'role' => $request->role
         ]);
 
-        return redirect()->route('admin.admins.index')->with('success', 'Admin berhasil ditambahkan');
+        return redirect()->route('admin.admins.index')
+            ->with('success', 'Admin berhasil ditambahkan');
     }
 
-    // Edit admin
     public function edit(Admin $admin)
     {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
         return view('admin.admins.edit', compact('admin'));
     }
 
-    // Update admin
     public function update(Request $request, Admin $admin)
     {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
-
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:admins,email,' . $admin->id,
-            'phone' => 'nullable|string',
-            'role' => 'required|in:admin,superadmin'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $admin->id,  // ← TAMBAH INI
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $admin->update([
+        $data = [
             'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'role' => $request->role
-        ]);
+            'email' => $request->email,  // ← TAMBAH INI
+        ];
 
-        return redirect()->route('admin.admins.index')->with('success', 'Admin berhasil diperbarui');
-    }
-
-    // Hapus admin
-    public function destroy(Admin $admin)
-    {
-        $this->checkLogin();
-        $this->checkSuperAdmin();
-
-        if ($admin->id === session()->get('admin_id')) {
-            return back()->withErrors(['error' => 'Anda tidak bisa menghapus akun sendiri']);
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
         }
 
+        $admin->update($data);
+
+        return redirect()->route('admin.admins.index')
+            ->with('success', 'Admin berhasil diupdate');
+    }
+
+    public function destroy(Admin $admin)
+    {
         $admin->delete();
-        return redirect()->route('admin.admins.index')->with('success', 'Admin berhasil dihapus');
+        return redirect()->route('admin.admins.index')
+            ->with('success', 'Admin berhasil dihapus');
     }
 }
